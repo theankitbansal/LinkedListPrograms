@@ -3,33 +3,36 @@
 
 using namespace std;
 
-
+//Create the structure of the node
 
 struct Node{
     int data;
     struct Node *next;
 }*first;
 
+//Function to create the Linked List
+
 void create(int A[], int n){
     int i;
-    struct Node *t, *last;
+    struct Node *t, *last;  //Creating temporary and last node
     first=new Node;
-    first->data=A[0];
-    first->next=NULL;
+    first->data=A[0];    //Assigned first element of an array to the first node data member.
+    first->next=NULL;    //Make the next node pointer null.
     last=first;
     for(i=1; i<n; i++){
-        t=new Node;
+        t=new Node;        
         t->data=A[i];
         t->next=NULL;
-        last->next=t;
+        last->next=t;       //Pointing the last node pointer to temporary node
         last=t;
     }
 }
 
+//Function to display the linked list
 void Display(struct Node *p){
     while(p!=NULL){
-        cout<<p->data<<" ";
-        p=p->next;
+        cout<<p->data<<" ";      // printing the data member of the linked list
+        p=p->next;              //Traversing the linked list
     }
 }
 
