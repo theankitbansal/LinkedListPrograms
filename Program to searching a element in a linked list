@@ -111,3 +111,77 @@ int main()
     return 0;
 }
 
+
+
+//Program to searching a element in a linked list using move to head method
+#include <bits/stdc++.h>
+
+using namespace std;
+
+struct Node{
+    int data;
+    struct Node *next;
+}*first;
+
+void create(int A[], int n){
+    struct Node *t, *last;
+    first =new Node;
+    first->data=A[0];
+    first->next=NULL;
+    last=first;
+    for(int i=1; i<n; i++){
+        t=new Node;
+        t->data=A[i];
+        t->next=NULL;
+        last->next=t;
+        last=t;
+    }
+}
+
+void Display(struct Node *p){
+    if(p!=NULL){
+       
+        cout<<p->data<<endl;
+         Display(p->next);
+    }
+}
+struct Node * search(struct Node *p, int key){
+    while(p){
+        if(p->data==key){
+            return p;
+        }
+        p=p->next;
+    }
+    return NULL;
+}
+
+struct Node * Lsearch(struct Node *p, int key){
+    struct Node *q;
+    while(p){
+        if(key==p->data){
+            q->next=p->next;
+            p->next=first;
+            first=p;
+            return p;
+        }
+        q=p;
+        p=p->next;
+    }
+    return NULL;
+}
+
+
+int main()
+{
+    struct Node *temp;
+    int A[]={3,5,25,1,15};
+    create(A,5);
+    temp=Lsearch(first,5);
+    if(temp)
+        cout<<"key is found" << temp->data<<endl;
+    else
+        cout<<"Key not found";
+    Display(first);    
+    return 0;
+}
+
