@@ -46,3 +46,57 @@ int main()
     cout<<min(first);
     return 0;
 }
+
+
+
+
+//Program to find the minimum element in the linked list 
+#include <bits/stdc++.h>
+
+using namespace std;
+
+struct Node{
+    int data;
+    struct Node *next;
+}*first;
+
+void create(int A[], int n){
+    struct Node *t, *last;
+    first =new Node;
+    first->data=A[0];
+    first->next=NULL;
+    last=first;
+    for(int i=1; i<n; i++){
+        t=new Node;
+        t->data=A[i];
+        t->next=NULL;
+        last->next=t;
+        last=t;
+    }
+}
+
+void Display(struct Node *p){
+    if(p!=NULL){
+        Display(p->next);
+        cout<<p->data<<endl;
+    }
+}
+
+int min(struct Node *p){
+    int min=INT_MAX;
+    while(p){
+        if(p->data<min)
+            min=p->data;
+        p=p->next;    
+    }
+    return min;
+}
+
+int main()
+{
+    int A[]={3,5,25,1,15};
+    create(A,5);
+    cout<<min(first);
+    return 0;
+}
+
