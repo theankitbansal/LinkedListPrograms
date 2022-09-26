@@ -54,3 +54,60 @@ int main()
         cout<<"Key not found";
     return 0;
 }
+
+
+
+//Program to searching a element in a linked list using recursion
+#include <bits/stdc++.h>
+
+using namespace std;
+
+struct Node{
+    int data;
+    struct Node *next;
+}*first;
+
+void create(int A[], int n){
+    struct Node *t, *last;
+    first =new Node;
+    first->data=A[0];
+    first->next=NULL;
+    last=first;
+    for(int i=1; i<n; i++){
+        t=new Node;
+        t->data=A[i];
+        t->next=NULL;
+        last->next=t;
+        last=t;
+    }
+}
+
+void Display(struct Node *p){
+    if(p!=NULL){
+        Display(p->next);
+        cout<<p->data<<endl;
+    }
+}
+
+struct Node * search(struct Node *p, int key){
+    if(p==0)
+        return NULL;
+    if(key==p->data)
+        return p;
+    return search(p->next, key);    
+}
+
+
+int main()
+{
+    struct Node *temp;
+    int A[]={3,5,25,1,15};
+    create(A,5);
+    temp=search(first, 5);
+    if(temp)
+        cout<<temp->data;
+    else
+        cout<<"Key not found";
+    return 0;
+}
+
