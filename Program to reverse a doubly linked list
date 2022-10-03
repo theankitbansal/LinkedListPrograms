@@ -1,0 +1,81 @@
+
+//Program to reverse a doubly linked list
+
+
+#include <iostream>
+
+using namespace std;
+
+struct Node{
+    struct Node *prev;
+    int data;
+    struct Node *next;
+}*first=NULL;
+
+void create(int A[], int n){
+    struct Node *t, *last;
+    int i;
+    first=new Node;
+    first->data=A[0];
+    first->prev=first->next=NULL;
+    last=first;
+    for(i=1; i<n; i++){
+        t=new Node;
+        t->data=A[i];
+        t->next=last->next;
+        t->prev=last;
+        last->next=t;
+        last=t;
+    }
+}
+
+void Display(struct Node *p){
+    while(p){
+        cout<<p->data<<" ";
+        p=p->next;
+    }
+    cout<<endl;
+}
+
+int Delete(struct Node *p, int index){
+   // struct Node *q;
+    int x=-1, i;
+    if(index==1){
+        first=first->next;
+        if(first) first->prev=NULL;
+        x=p->data;
+        delete p;
+    }else{
+        for(i=0; i<index; i++)
+            p=p->next;
+        p->prev->next=p->next;
+        if(p->next)
+            p->next->prev=p->prev;
+        x=p->data;
+        delete p;
+    }
+    return x;
+}
+
+void Reverse(struct Node *p){
+    struct Node *temp;
+    while(p){
+        temp=p->next;
+        p->next=p->prev;
+        p->prev=temp;
+        p=p->prev;
+        if(p!=NULL && p->next==NULL)
+            first=p;
+    }
+}
+
+int main()
+{
+    int A[]={2,3,6,4,8,6};
+    create(A,6);
+   
+    Reverse(first);
+    Display(first);
+
+    return 0;
+}
